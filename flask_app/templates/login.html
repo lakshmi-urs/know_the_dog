@@ -1,0 +1,53 @@
+{% extends "user_default.html" %} {% block title %}Login{%endblock%} {%block
+header%}
+<style></style>
+
+{%endblock%} {%block content%}
+
+<div class="container my-5">
+  <div class="container" style="width: 70%">
+    <form
+      class="row g-3 border border-warning py-2"
+      action="{{url_for('login.index')}}"
+      method="POST"
+    >
+      <div class="col-12">
+        <h3 class="text-light bg-warning text-center p-2">Login</h3>
+      </div>
+
+      <div class="col-12">
+        <label for="email_address" class="form-label">Email</label>
+        <input
+          type="email"
+          class="form-control border border-warning"
+          id="email_address"
+          name="email_address"
+          required
+        />
+      </div>
+
+      <div class="col-12">
+        <label for="password" class="form-label">Password</label>
+        <input
+          type="password"
+          class="form-control border border-warning"
+          id="password"
+          name="password"
+          required
+        />
+      </div>
+
+      <div class="col-12 d-flex justify-content-center">
+        <button
+          type="submit"
+          class="btn btn-success"
+          name="action"
+          value="login"
+        >
+          Login
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

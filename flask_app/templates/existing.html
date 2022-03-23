@@ -1,0 +1,71 @@
+{% extends "user_default.html" %} {% block title %}Existing Blog{%endblock%}
+{%block header%}
+<style></style>
+
+{%endblock%} {%block content%}
+
+<div class="container my-5">
+  <div class="container" style="width: 70%">
+    <form
+      class="row g-3 border border-warning py-2"
+      action="{{url_for('blogs.existing')}}"
+      method="POST"
+    >
+      <div class="col-12">
+        <h3 class="text-light bg-warning text-center p-2">Create a Post</h3>
+      </div>
+      <div class="col-12">
+        <label for="Blog Name" class="form-label">Blog Name</label>
+
+        <select
+          class="form-select border border-warning"
+          name="blog_id"
+          id="blog_id"
+          required
+        >
+          <option value="" hidden selected>Select a blog category</option>
+          {%for blog in blogs %}
+          <option value="{{blog.id}}">{{blog.blog_name}}</option>
+          {%endfor%}
+        </select>
+      </div>
+
+      <div class="col-12">
+        <label for="post_title" class="form-label">Post Title</label>
+        <input
+          type="text"
+          class="form-control border border-warning"
+          id="post_title"
+          name="post_title"
+          required
+        />
+      </div>
+
+      <div class="col-12">
+        <label for="post_description" class="form-label"
+          >Post Description</label
+        >
+        <textarea
+          class="form-control border border-warning"
+          style="height: 250px !important"
+          id="post_description"
+          name="post_description"
+          width="100%"
+          required
+        ></textarea>
+      </div>
+
+      <div class="col-12 d-flex justify-content-center">
+        <button
+          type="submit"
+          class="btn btn-success"
+          name="action"
+          value="create_post"
+        >
+          Create Post
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

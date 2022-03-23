@@ -1,0 +1,52 @@
+{% extends "user_default.html" %} {% block title %}Posts{%endblock%} {%block
+header%}
+<style>
+  .box_background {
+    text-decoration: none;
+    background-color: black !important;
+  }
+  .box:hover {
+    opacity: 0.7;
+  }
+</style>
+{%endblock%} {%block content%}
+
+<div class="container">
+  <h3 class="mt-5 bg-warning text-center text-light py-3">
+    Select Post to Edit
+  </h3>
+  {% for post in posts%}
+
+  <div class="box row my-2">
+    <div class="col-11">
+      <a
+        href="/blogs/edit/blog/{{blog_id}}/posts/{{post.id}}"
+        style="text-decoration: none"
+      >
+        <div class="card ps-2 pt-2">
+          <div class="card-body p-0">
+            <h5 class="card-title text-dark">{{post.post_title}}</h5>
+            <p class="card-text text-dark">{{post.post_description}}</p>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col">
+      <form action="/delete/post" class="w-100 h-100" method="POST">
+        <input type="text" name="post_id" value="{{post.id}}" hidden readonly />
+        <button
+          class="btn btn-danger"
+          name="action"
+          value="delete_blog"
+          style="width: 100%; height: 100%"
+
+                  >
+          <i class="fa fa-times"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+  {%endfor%}
+</div>
+
+{% endblock %}

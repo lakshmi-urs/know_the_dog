@@ -1,0 +1,152 @@
+{% extends "user_default.html" %} {% block title %}Predictions{%endblock%} {%
+block header %}
+<style>
+  .black-color {
+    color: rgb(114, 110, 110) !important;
+  }
+</style>
+<script
+  type="text/javascript"
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+></script>
+<script type="text/javascript">
+  $(document).ready(function (e) {
+    $("#upload").on("click", function () {
+      var form_data = new FormData();
+      var ins = document.getElementById("multiFiles").files.length;
+
+      if (ins == 0) {
+        $("#msg").html(
+          '<span style="color:red">Select at least one file</span>'
+        );
+        return;
+      }
+
+      for (var x = 0; x < ins; x++) {
+        form_data.append(
+          "files[]",
+          document.getElementById("multiFiles").files[x]
+        );
+      }
+
+      $.ajax({
+        url: "{{url_for('predictions.upload')}}", // point to server-side URL
+        dataType: "json", // what to expect back from server
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: form_data,
+        type: "post",
+        success: function (response) {
+          $("#resultAppeared").css("display", "initial");
+
+          if (response.Result == "Husky") {
+            $("#resultPredicted").html(
+              "Prediction: " + response.Result + " - Tamable breed " + "- $1000"
+            );
+          } else if (response.Result == "Dachshund") {
+            $("#resultPredicted").html(
+              "Prediction: " + response.Result + " - Tamable breed " + "- $2500"
+            );
+          } else if (response.Result == "Rottweiler") {
+            $("#resultPredicted").html(
+              "Prediction: " + response.Result + " - Tamable breed " + "- $250"
+            );
+          } else if (response.Result == "Dalmation") {
+            $("#resultPredicted").html(
+              "Prediction: " +
+                response.Result +
+                " - Tamable breed " +
+                "- $500 to $1000"
+            );
+          } else if (response.Result == "Golden Retriever") {
+            $("#resultPredicted").html(
+              "Prediction: " +
+                response.Result +
+                " - Tamable breed " +
+                "- $1000 to $2500"
+            );
+          }
+          // display success response
+
+
+
+          $("#Accuracy").html("Accuracy: " + response.accuracy);
+          $("#outputImage").html(
+            `<img class="p-2"
+               style="border-radius: 20px"
+          width="250px"
+          src="../static/uploads/` +
+              response.imageName +
+              `" alt="" />`
+          );
+        },
+      });
+    });
+  });
+</script>
+{% endblock %} {%block content%}
+<div class="container">
+  <h2 class="text-center text-dark">Know the Dog</h2>
+  <div>
+    <center>
+      <input
+        type="file"
+        id="multiFiles"
+        name="files[]"
+        multiple="multiple"
+        hidden
+        required
+      />
+      <label
+        for="multiFiles"
+        class="btn btn-outline btn-warning btn-lg text-light px-5 mt-4"
+      >
+        &nbsp;&nbsp; Select a Dog Image&nbsp;&nbsp;
+      </label>
+    </center>
+    <center>
+      <button
+        class="btn btn-outline btn-success btn-lg text-light px-5 mt-4"
+        id="upload"
+      >
+        Predict
+      </button>
+    </center>
+
+    <div class="row">
+      <div class="col-lg-2 col-0 col-md-2 col-sm-0"></div>
+      <div
+        class="col-6 bg-dark text-light p-5 mt-3"
+        style="width: 550px; border-radius: 15px"
+      >
+        <ul style="list-style: none">
+          <li id="resultAppeared" style="display: none">
+            <h5 class="px-0 text-center">Output</h5>
+          </li>
+          <li
+            class="px-4 text-start text-light"
+            style="font-size: 20px"
+            id="resultPredicted"
+          ></li>
+          <li
+            class="px-4 text-start text-light"
+            style="font-size: 20px"
+            id="Accuracy"
+          ></li>
+          <li id="Loss"></li>
+        </ul>
+      </div>
+      <div class="col-3 pt-2 pb-0" id="outputImage">
+        <img
+          class="p-2"
+          src="../static/uploads/default_dog.jpg"
+          style="border-radius: 20px"
+          width="250px"
+          alt=""
+        />
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

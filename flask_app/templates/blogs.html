@@ -1,0 +1,45 @@
+{% extends "user_default.html" %} {% block title %}Blogs{%endblock%} {%block
+header%}
+<style>
+  .box_background {
+    text-decoration: none;
+    background-color: black !important;
+  }
+  .box:hover {
+    opacity: 0.7;
+  }
+</style>
+{%endblock%} {%block content%}
+
+<div class="container">
+  <h3 class="mt-5 bg-warning text-center text-light py-3">
+    Welcome
+  </h3>
+  {%for blog in blogs%}
+  <a class="box_background" href="/show/{{blog.blog_path}}">
+    <div class="box row my-2">
+      <div class="col-12">
+        <div class="card text-center">
+          <div class="card-body p-0">
+            <div class="row p-0 m-0">
+              <div class="col-8 mx-auto mt-5 mb-4">
+                <h5 class="card-title text-dark bg-transparent">
+                  {{blog.blog_name}}
+                </h5>
+              </div>
+              <div class="col bg-dark p-2 px-5">
+                <h4 class="mx-auto mt-3 bg-dark text-light">
+                  {{blog.total_posts}}
+                </h4>
+                <h6 class="p-0 m-0 text-warning">POSTS</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </a>
+  {%endfor%}
+</div>
+
+{% endblock %}

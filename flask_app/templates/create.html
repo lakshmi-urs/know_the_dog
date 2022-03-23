@@ -1,0 +1,32 @@
+{% extends "user_default.html" %} {% block title %}Create Blog{%endblock%}
+{%block header%}
+<style></style>
+
+{%endblock%} {%block content%}
+
+<div class="container">
+  <form class="row g-3 m-5" action="{{url_for('blogs.create')}}" method="POST">
+    <div class="col-12 d-flex justify-content-center">
+      <input
+        type="text"
+        class="form-control fs-3 text-center border-warning"
+        style="width: 350px; border-radius: 25px"
+        id="Blog Name"
+        name="blog_name"
+        placeholder="Enter your blog name"
+        required
+        maxlength = "25"
+      />
+      <button
+        type="submit"
+        class="btn btn-success fs-3 ms-3"
+        style="width: 55px; border-radius: 50px"
+        name="action"
+        value="create_blog"
+      >
+        <i class="fa fa-check" aria-hidden="true"></i>
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock %}

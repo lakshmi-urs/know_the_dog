@@ -1,0 +1,48 @@
+{% extends "user_default.html" %} {% block title %}Dashboard{%endblock%} {%block
+header%}
+<style>
+  .card:hover {
+    opacity: 0.5;
+  }
+  a {
+    text-decoration: none;
+  }
+</style>
+
+{%endblock%} {%block content%}
+
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <a href="/blogs/add">
+        <div class="card m-5" style="width: 550px">
+          <i
+            class="fa fa-plus bg-warning text-center text-light"
+            style="font-size: 150px"
+            aria-hidden="true"
+          ></i>
+          <div class="card-body text-warning bg-light">
+            <h4 class="card-title text-center">ADD BLOG</h4>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-6">
+      <a href="/blogs/edit">
+        <div class="card m-5" style="width: 430px">
+          <i
+            class="fa fa-refresh bg-light text-center text-warning"
+            style="font-size: 150px"
+            aria-hidden="true"
+          ></i>
+          <div class="card-body text-light bg-warning">
+            <h4 class="card-title text-center">MODIFY BLOG</h4>
+          </div>
+        </div>
+      </a>
+    </div>
+
+
+  </div>
+</div>
+{% endblock %}

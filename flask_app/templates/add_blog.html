@@ -1,0 +1,46 @@
+{% extends "user_default.html" %} {% block title %}Add Blog{%endblock%} {%block
+header%}
+<style>
+  .card:hover {
+    opacity: 0.5;
+  }
+  a {
+    text-decoration: none;
+  }
+</style>
+
+{%endblock%} {%block content%}
+
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <a href="/blogs/add/create">
+        <div class="card m-5" style="width: 550px">
+          <img
+            class="card-img-top"
+            src="../static/create_blog.jpg"
+            alt="Card image"
+          />
+          <div class="card-body bg-warning">
+            <h4 class="card-title text-light text-center">ADD CATEGORY</h4>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-6">
+      <a href="/blogs/add/existing">
+        <div class="card m-5" style="width: 430px">
+          <img
+            class="card-img-top"
+            src="../static/existing_blog.jpg"
+            alt="Card image"
+          />
+          <div class="card-body border">
+            <h4 class="card-title text-center text-dark">ADD CONTENT</h4>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock %}

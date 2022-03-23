@@ -1,0 +1,60 @@
+{% extends "user_default.html" %} {% block title %}Existing Blog{%endblock%}
+{%block header%}
+<style></style>
+
+{%endblock%} {%block content%}
+
+<div class="container my-5">
+  <div class="container" style="width: 70%">
+    <form
+      class="row g-3 border border-warning py-2"
+      action="{{url_for('blogs.existing')}}"
+      method="POST"
+    >
+      <div class="col-12">
+        <h3 class="text-light bg-warning text-center p-2">Update a Post</h3>
+      </div>
+
+      <div class="col-12">
+        <label for="post_title" class="form-label">Post Title</label>
+        <input type="text" value="{{post.id}}" name="post_id" hidden readonly />
+        <input
+          type="text"
+          class="form-control border border-warning"
+          id="post_title"
+          name="post_title"
+          value="{{post.post_title}}"
+          required
+        />
+      </div>
+
+      <div class="col-12">
+        <label for="post_description" class="form-label"
+          >Post Description</label
+        >
+        <textarea
+          class="form-control border border-warning"
+          style="height: 250px !important"
+          id="post_description"
+          name="post_description"
+          width="100%"
+          required
+        >
+{{post.post_description}}</textarea
+        >
+      </div>
+
+      <div class="col-12 d-flex justify-content-center">
+        <button
+          type="submit"
+          class="btn btn-success"
+          name="action"
+          value="update_post"
+        >
+          Update Post
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
